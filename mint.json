@@ -14,7 +14,7 @@
   "customStyles": {
     "css": "a { color: #0071e3 !important; } a:hover { color: #0056b3 !important; }"
   },
-  "topbarCtaButton": {cd .
+  "topbarCtaButton": {
     "name": "Comenzar",
     "url": "https://braviloai.com/onboarding"
   },
