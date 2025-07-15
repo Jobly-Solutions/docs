@@ -1,0 +1,140 @@
+---
+title: 'Scout - Consulta'
+api: 'POST https://app.braviloai.com/api/agents/{agentId}/query'
+description: 'Esto te permite consultar a tu scout para una consulta específica.'
+authMethod: 'bearer'
+---
+
+### Ruta
+
+<ParamField path="agentId" type="string" required>
+  El id del scout que quieres consultar.
+</ParamField>
+
+### Cuerpo
+
+<ParamField body="query" type="string" required>
+  Esta es la consulta que quieres hacer a tu scout.
+</ParamField>
+
+<ParamField body="temperature" type="number" min="0.0" max="1.0">
+  Temperatura del modelo (mín 0.0, máx 1.0)
+</ParamField>
+
+<ParamField body="conversationId" type="string">
+  ID de la conversación
+</ParamField>
+
+<ParamField body="visitorId" type="string">
+  ID del participante que está enviando la consulta
+</ParamField>
+
+<ParamField body="streaming" type="boolean">
+  Habilitar streaming
+</ParamField>
+
+<ParamField body="filters" type="Objeto de Filtros">
+  <Expandable title="propiedades">
+
+<ParamField body="custom_ids" type="array de strings">
+  Filtrar por IDs Personalizados
+</ParamField>
+
+<ParamField body="datasource_ids" type="array de strings">
+  Filtrar por IDs de Fuentes de Datos
+</ParamField>
+
+  </Expandable>
+</ParamField>
+
+### Respuesta
+
+<ResponseField name="answer" type="string">
+  La respuesta del scout.
+</ResponseField>
+<ResponseField name="conversationId" type="string">
+  ID de la conversación
+</ResponseField>
+<ResponseField name="visitorId" type="string">
+  ID del participante que está enviando la consulta
+</ResponseField>
+<ResponseField name="sources" type="string">
+  Fragmentos de Fuentes de Datos que se usaron para generar la respuesta
+</ResponseField>
+
+### Streaming
+
+##### Cuando el streaming está habilitado, el endpoint emitirá eventos "answer" (respuesta del modelo) y "endpoint_response" (respuesta completa del endpoint)
+
+```js
+import {
+  EventStreamContentType,
+  fetchEventSource,
+} from '@microsoft/fetch-event-source';
+
+let buffer = '';
+let bufferEndpointResponse = '';
+const ctrl = new AbortController();
+
+await fetchEventSource(queryAgentURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        signal: ctrl.signal,
+        body: JSON.stringify({
+          streaming: true,
+          query,
+          conversationId,
+          visitorId,
+        }),
+
+        async onopen(response) {
+          if (response.status === 402) {
+            throw new ApiError(ApiErrorType.USAGE_LIMIT);
+          }
+        },
+        onmessage: (event) => {
+          if (event.data === '[DONE]') {
+            // Fin del stream
+            ctrl.abort();
+
+            try {
+              const { sources, conversationId, visitorId } = JSON.parse(
+                bufferEndpointResponse
+              ) as ChatResponse;
+            } catch {}
+          } else if (event.data?.startsWith('[ERROR]')) {
+            // ...
+          } else if (event.event === "endpoint_response") {
+            bufferEndpointResponse += event.data;
+          } else if (event.event === "answer") {
+            buffer += event.data;
+            // ...
+          }
+       },
+  });
+```
+
+<RequestExample>
+
+```bash Ejemplo de Solicitud
+curl --location --request POST 'https://app.braviloai.com/api/agents/<agentId>/query' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <API_KEY>' \
+--data-raw '{
+    "query": "Lorem Ipsum..."
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Respuesta
+{
+  "answer": "Lorem upsum..."
+}
+```
+
+</ResponseExample>

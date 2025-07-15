@@ -1,0 +1,26 @@
+---
+title: Widget Estándar
+description: 'Integrar un formulario de Bravilo AI usando el widget Estándar'
+---
+
+Para instalar un Formulario en tu sitio web usando el widget Estándar usa el siguiente fragmento de código:
+
+```html
+<script type="module">
+  import Form from 'https://cdn.jsdelivr.net/npm/@bravilo/embeds/dist/form/index.js';
+
+  Form.initStandard({
+    formId: 'TU_FORMULARIO_ID',
+  });
+</script>
+
+<braviloai-form-standard />
+```
+
+Reemplaza `TU_FORMULARIO_ID` con el ID de tu Formulario
+
+<Note>
+  Puedes encontrar el ID del Formulario en la configuración del Formulario bajo la pestaña de Configuración.
+</Note>
+
+Ve todos los atributos disponibles en la [Referencia del Formulario](/widgets/form/reference).

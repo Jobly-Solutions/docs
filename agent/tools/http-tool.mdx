@@ -1,0 +1,42 @@
+---
+title: Herramienta HTTP
+---
+
+La Herramienta HTTP es una característica altamente poderosa, que permite a los Scouts de IA ejecutar Solicitudes HTTP sin problemas, permitiéndote llamar cualquier API durante una conversación. (Internamente usa function calling [https://platform.openai.com/docs/guides/function-calling](https://platform.openai.com/docs/guides/function-calling))
+
+{/* ![Xnapper-2024-01-12-10.30.52.png](/images/http-tool/Xnapper-2024-01-12-10.30.52.png) */}
+
+Esta herramienta está integrada en el modelo de lenguaje, que utiliza tanto el nombre de la herramienta como su descripción detallada, junto con parámetros predefinidos, para determinar los momentos apropiados para la activación.
+
+Además, el modelo puede ser específicamente instruido sobre cuándo emplear la herramienta a través de directivas incluidas en su prompt del sistema.
+
+Por ejemplo, una descripción ejemplar de la Herramienta HTTP podría ser:
+**"Útil para recuperar imágenes aleatorias de gatos."**
+
+{/* ![Xnapper-2024-01-12-10.30.12.png](/images/http-tool/Xnapper-2024-01-12-10.30.12.png) */}
+
+### Parámetros de Solicitud
+
+El editor de la Herramienta HTTP facilita la creación de variables necesarias para realizar la solicitud HTTP.
+
+Incluye una opción etiquetada "Proporcionado por el Usuario", que señala al modelo que debe recopilar los datos requeridos directamente de la conversación en curso.
+
+{/* ![Xnapper-2024-01-12-10.36.18.png](/images/http-tool/Xnapper-2024-01-12-10.36.18.png) */}
+
+### **Proceso de Aprobación Simplificado**
+
+Con la activación de la función "Aprobación Requerida", el Scout de IA esperará autorización de un administrador antes de proceder con la solicitud.
+
+Esta función asegura una operación controlada y segura.
+
+{/* ![Xnapper-2024-01-12-10.53.40.png](/images/http-tool/Xnapper-2024-01-12-10.53.40.png) */}
+
+{/* ![Xnapper-2024-01-12-11.17.42.png](/images/http-tool/Xnapper-2024-01-12-11.17.42.png) */}
+
+{/* ![Xnapper-2024-01-12-11.18.19.png](/images/http-tool/Xnapper-2024-01-12-11.18.19.png) */}
+
+{/* ![Xnapper-2024-01-12-11.19.14.png](/images/http-tool/Xnapper-2024-01-12-11.19.14.png) */}
+
+### **Flujos de Trabajo**
+
+Además, el modelo es capaz de ejecutar múltiples acciones simultáneamente y puede integrar varias herramientas para gestionar eficientemente flujos de trabajo intrincados.

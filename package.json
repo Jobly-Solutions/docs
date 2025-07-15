@@ -1,0 +1,22 @@
+{
+  "name": "docs",
+  "version": "1.0.174",
+  "description": "Bravilo AI Documentation",
+  "scripts": {
+    "dev": "mintlify dev --port 3333",
+    "check": "mintlify broken-links"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jobly-Solutions"
+  },
+  "author": "Luciano Joaquin Alfonso",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jobly-Solutions"
+  },
+  "homepage": "https://github.com/Jobly-Solutions",
+  "dependencies": {
+    "mintlify": "^4.0.139"
+  }
+}
