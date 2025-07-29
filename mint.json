@@ -132,7 +132,7 @@
       ]
     },
     {
-      "group": "chaindesk API",
+      "group": "Bravilo API",
       "pages": ["api-reference/authentication"]
     },
 
